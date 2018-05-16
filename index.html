@@ -5,23 +5,25 @@
     <title>Vue Study</title>
 </head>
 <body>
-<div id="app">
-    <p>{{ foo }}</p>
-    <!-- 这里的 `foo` 不会更新！ -->
-    <button v-on:click="foo = 'baz'">Change it</button>
+<div id="example">
+    <p>Original message: "{{ message }}"</p>
+    <p>Computed reversed message: "{{ reversedMessage }}"</p>
 </div>
 <script src="js/vue.js">
 </script>
 <script>
-    var obj = {
-        foo: 'bar'
-    }
-
-    Object.freeze(obj)
-
-    new Vue({
-        el: '#app',
-        data: obj
+    var vm = new Vue({
+        el: '#example',
+        data: {
+            message: 'Hello'
+        },
+        computed: {
+            // 计算属性的 getter
+            reversedMessage: function () {
+                // `this` 指向 vm 实例
+                return this.message.split('').reverse().join('')
+            }
+        }
     })
 </script>
 </body>
