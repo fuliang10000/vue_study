@@ -5,23 +5,24 @@
     <title>Vue Study</title>
 </head>
 <body>
-<div id="example">
-    <p>Original message: "{{ message }}"</p>
-    <p>Computed reversed message: "{{ reversedMessage }}"</p>
-</div>
+<div id="app" v-bind:class="classObject"></div>
 <script src="js/vue.js">
 </script>
 <script>
     var vm = new Vue({
-        el: '#example',
+        el: '#app',
         data: {
-            message: 'Hello'
+            isActive: true,
+            error: {
+                type:'fatal'
+            }
         },
         computed: {
-            // 计算属性的 getter
-            reversedMessage: function () {
-                // `this` 指向 vm 实例
-                return this.message.split('').reverse().join('')
+            classObject: function () {
+                return {
+                    active: this.isActive && this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
             }
         }
     })
