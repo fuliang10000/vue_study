@@ -5,24 +5,21 @@
     <title>Vue Study</title>
 </head>
 <body>
-<div id="app" v-bind:class="classObject"></div>
+<div id="app" v-bind:style="[baseStyles, overridingStyles]">111213</div>
 <script src="js/vue.js">
 </script>
 <script>
     var vm = new Vue({
         el: '#app',
         data: {
-            isActive: true,
-            error: {
-                type:'fatal'
-            }
-        },
-        computed: {
-            classObject: function () {
-                return {
-                    active: this.isActive && this.error,
-                    'text-danger': this.error && this.error.type === 'fatal'
-                }
+            baseStyles: {
+                color : 'blue',
+                fontSize: '10px',
+                textAlign: 'center'
+            },
+            overridingStyles: {
+                lineHeight: '30px',
+                border: '1px solid red'
             }
         }
     })
