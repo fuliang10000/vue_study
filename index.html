@@ -5,21 +5,37 @@
     <title>Vue Study</title>
 </head>
 <body>
-<div id="app" v-bind:style="[baseStyles, overridingStyles]">111213</div>
+<div id="example-3">
+    <!-- 阻止单击事件继续传播 -->
+    <a v-on:click.stop="doThis"></a>
+
+    <!-- 提交事件不再重载页面 -->
+    <form v-on:submit.prevent="onSubmit"></form>
+
+    <!-- 修饰符可以串联 -->
+    <a v-on:click.stop.prevent="doThat"></a>
+
+    <!-- 只有修饰符 -->
+    <form v-on:submit.prevent></form>
+
+    <!-- 添加事件监听器时使用事件捕获模式 -->
+    <!-- 即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理 -->
+    <div v-on:click.capture="doThis">...</div>
+
+    <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+    <!-- 即事件不是从内部元素触发的 -->
+    <div v-on:click.self="doThat">...</div>
+</div>
 <script src="js/vue.js">
 </script>
 <script>
-    var vm = new Vue({
-        el: '#app',
-        data: {
-            baseStyles: {
-                color : 'blue',
-                fontSize: '10px',
-                textAlign: 'center'
-            },
-            overridingStyles: {
-                lineHeight: '30px',
-                border: '1px solid red'
+    new Vue({
+        el: '#example-3',
+        methods: {
+            warn: function (message, event) {
+                // 现在我们可以访问原生事件对象
+                if (event) event.preventDefault()
+                alert(message)
             }
         }
     })
