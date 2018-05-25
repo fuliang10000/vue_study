@@ -6,27 +6,19 @@
 </head>
 <body>
 <div id="add">
-    <select v-model="selected">
-        <option v-for="option in options" v-bind:value="option.value">
-            {{ option.text }}
-        </option>
-    </select>
-    <span>Selected: {{ selected }}</span>
+    <blog-post title="My journey with Vue"></blog-post>
+    <blog-post title="Blogging with Vue"></blog-post>
+    <blog-post title="Why Vue is so fun"></blog-post>
 </div>
 <script src="js/vue.js">
 </script>
 <script>
+    Vue.component('blog-post', {
+        props: ['title'],
+        template: '<h3>{{ title }}</h3>'
+    })
     var vm = new Vue({
-        el: '#add',
-        data: {
-            selected: '1',
-            options: [
-                {text: 'A', value: 1},
-                {text: 'B', value: 2},
-                {text: 'C', value: 3},
-                {text: 'D', value: 4}
-            ]
-        }
+        el: '#add'
     })
 </script>
 </body>
