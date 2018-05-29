@@ -6,19 +6,26 @@
 </head>
 <body>
 <div id="add">
-    <blog-post title="My journey with Vue"></blog-post>
-    <blog-post title="Blogging with Vue"></blog-post>
-    <blog-post title="Why Vue is so fun"></blog-post>
+    <alert-box>
+        Something bad happened.
+    </alert-box>
 </div>
-<script src="js/vue.js">
+<script src="js/vue.js"></script>
+<script type="text/html" id="temp">
+    <div class="demo-alert-box">
+        <strong>Error!</strong>
+        <slot></slot>
+    </div>
 </script>
 <script>
-    Vue.component('blog-post', {
-        props: ['title'],
-        template: '<h3>{{ title }}</h3>'
-    })
+    Vue.component('alert-box', {
+        template: '#temp'
+    });
     var vm = new Vue({
-        el: '#add'
+        el: '#add',
+        data: {
+
+        }
     })
 </script>
 </body>
