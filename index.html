@@ -5,15 +5,18 @@
     <title>Vue Study</title>
 </head>
 <body>
-<div id="add">
-    <div :style="{ fontSize: postFontSize + 'em' }">
-        <blog-post
-                v-for="post in posts"
-                v-bind:key="post.id"
-                v-bind:post="post"
-                v-on:enlarge-text="onEnlargeText"
-                ></blog-post>
-    </div>
+<!--<div id="add">-->
+    <!--<div :style="{ fontSize: postFontSize + 'em' }">-->
+        <!--<blog-post-->
+                <!--v-for="post in posts"-->
+                <!--v-bind:key="post.id"-->
+                <!--v-bind:post="post"-->
+                <!--v-on:enlarge-text="onEnlargeText">-->
+        <!--</blog-post>-->
+    <!--</div>-->
+<!--</div>-->
+<div id="app1">
+    <custom-input v-model="searchText"></custom-input>
 </div>
 <script src="js/vue.js"></script>
 <script type="text/html" id="temp">
@@ -25,27 +28,45 @@
         </button>
     </div>
 </script>
+<script type="text/html" id="input">
+    <input v-bind:value="value"
+           v-on:input="$emit('input', $event.target.value)">
+</script>
 <script>
     Vue.component('blog-post', {
         props: ['post'],
         template: '#temp'
     });
+    Vue.component('custom-input', {
+        props: ['value'],
+        template: '#input'
+    });
     var vm = new Vue({
-        el: '#add',
-        data: {
-            posts: [
-                { id: 1, title: 'My journey with Vue', content: 'content1'},
-                { id: 2, title: 'Blogging with Vue', content: 'content2'},
-                { id: 3, title: 'Why Vue is so fun', content: '<h1>content3</h1>'}
-            ],
-            postFontSize: 1
+        el: '#app1',
+        date: {
         },
-        methods:{
-            onEnlargeText: function (event) {
-                this.postFontSize += event;
+        methods: {
+            searchText: function (event) {
+                this.value += event;
             }
         }
     });
+//    var vm = new Vue({
+//        el: '#add',
+//        data: {
+//            posts: [
+//                { id: 1, title: 'My journey with Vue', content: 'content1'},
+//                { id: 2, title: 'Blogging with Vue', content: 'content2'},
+//                { id: 3, title: 'Why Vue is so fun', content: '<h1>content3</h1>'}
+//            ],
+//            postFontSize: 1
+//        },
+//        methods:{
+//            onEnlargeText: function (event) {
+//                this.postFontSize += event;
+//            }
+//        }
+//    });
 </script>
 </body>
 </html>
